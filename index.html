@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Web Redirector
+        </title>
+        <style>
+            * {
+                margin: auto;
+                text-align: center;
+                font-family: Monospace;
+            }
+            html {
+                overflow: hidden;
+                background: linear-gradient(45deg, #422 0%, #522 100%);
+                height: 100%;
+                margin: 0;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+            input {
+                margin-top: 20px;
+                margin-bottom: 50px;
+                border: none;
+                background: linear-gradient(45deg, #FDDD 0%, #CAA 100%);
+                font-size: 40px;
+                padding: 5px;
+                transition: 0.5s;
+                width: 40%;
+                --notchSize: 15px;
+                clip-path: polygon(
+                    0% var(--notchSize),
+                    var(--notchSize) 0%,
+                    calc(100% - var(--notchSize)) 0%,
+                    100% var(--notchSize),
+                    100% calc(100% - var(--notchSize)),
+                    calc(100% - var(--notchSize)) 100%,
+                    var(--notchSize) 100%,
+                    0% calc(100% - var(--notchSize))
+                );
+            }
+            input:focus {
+                outline: none;
+                width: 100%;
+                --notchSize: 0px;
+                clip-path: polygon(
+                    0% var(--notchSize),
+                    var(--notchSize) 0%,
+                    calc(100% - var(--notchSize)) 0%,
+                    100% var(--notchSize),
+                    100% calc(100% - var(--notchSize)),
+                    calc(100% - var(--notchSize)) 100%,
+                    var(--notchSize) 100%,
+                    0% calc(100% - var(--notchSize))
+                );
+            }
+            .cube {
+                margin-top: 170px;
+                background: rgba(0, 0, 0, 0.5);
+                color: #FFF;
+                font-size: 20px;
+                width: 350px;
+                padding: 20px;
+                font-weight: bold;
+                animation: rotatecube 60s linear;
+                animation-iteration-count: infinite;
+                --notchSize: 15px;
+                clip-path: polygon(
+                    0% var(--notchSize),
+                    var(--notchSize) 0%,
+                    calc(100% - var(--notchSize)) 0%,
+                    100% var(--notchSize),
+                    100% calc(100% - var(--notchSize)),
+                    calc(100% - var(--notchSize)) 100%,
+                    var(--notchSize) 100%,
+                    0% calc(100% - var(--notchSize))
+                );
+            }
+            .title {
+                width: 40%;
+                margin-top: 20px;
+            }
+            button {
+                border: none;
+                font-size: 20px;
+                padding: 4px;
+                padding-left: 16px;
+                padding-right: 16px;
+                transition: 0.5s;
+                border-radius: 4px;
+                background: #644;
+                color: #FFF;
+                --notchSize: 15px;
+                clip-path: polygon(
+                    0% var(--notchSize),
+                    var(--notchSize) 0%,
+                    calc(100% - var(--notchSize)) 0%,
+                    100% var(--notchSize),
+                    100% calc(100% - var(--notchSize)),
+                    calc(100% - var(--notchSize)) 100%,
+                    var(--notchSize) 100%,
+                    0% calc(100% - var(--notchSize))
+                );
+            }
+            button:active {
+                transform: rotateX(360deg);
+                background: #FF0000;
+            }
+            @keyframes rotatecube {
+                0% { transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) }
+                25% { transform: rotateY(180deg) rotateX(360deg) rotateZ(90deg) }
+                50% { transform: rotateY(360deg) rotateX(720deg) rotateZ(180deg) }
+                75% { transform: rotateY(540deg) rotateX(1080deg) rotateZ(270deg) }
+                100% { transform: rotateY(720deg) rotateX(1440deg) rotateZ(360deg) }
+            }
+            .magic {
+                width: 350px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="stuff">
+            <img class="title" src="./logo.webp"><br>
+            <input id='siteInput' autocomplete="off" placeholder="https://example.com">
+            <div class="row">
+                <button onclick="goSite()">GO</button>
+                <button onclick="newTab()">NEW TAB</button>
+                <button onclick="newWin()">NEW WINDOW</button>
+            </div>
+        </div>
+        <p id="motdP" class="cube"></p>
+        <script>
+            var widenessthing;
+            function goSite () {
+                var site = document.getElementById('siteInput').value;
+                window.open(site, '_self')
+            }
+            function newTab () {
+                var site = document.getElementById('siteInput').value;
+                window.open(site, '_blank')
+            }
+            function newWin () {
+                var site = document.getElementById('siteInput').value;
+                window.open(site, '_window', 'width=800,height=800,left=50,top=50')
+            }
+            function e () {
+                for (var i = 0; i < 20; i++) {
+                    document.getElementById('motdP').innerHTML = document.getElementById('motdP').innerHTML + 'E'
+                }
+                document.getElementById('motdP').innerHTML = document.getElementById('motdP').innerHTML + 'E\n'
+            }
+            function the () {
+                document.getElementById('motdP').innerHTML = Math.random()
+            }
+            function motdSet (text) {
+                document.getElementById('motdP').innerHTML = text
+            }
+            function displaymsg () {
+                var r = Math.floor(Math.random() * 16);
+                if (r == 0) {
+                    motdSet('EEEEEEEEEEEEEEEEEEEEE\n');
+                    setInterval(e, 100)
+                } else if (r == 1) {
+                    motdSet('There is not one good reason why you are here. Not one.')
+                } else if (r == 2) {
+                    motdSet('A sad excuse for an omnibox.')
+                } else if (r == 3) {
+                    motdSet('Third thing here.')
+                } else if (r == 4) {
+                    motdSet('Internet Explorer was a great browser.')
+                } else if (r == 5) {
+                    motdSet('Never mix up "rm -r ./*" and "rm -r /*".')
+                } else if (r == 6) {
+                    motdSet('The Chromebook Recovery Utility is great. No flaws at all.')
+                } else if (r == 7) {
+                    setInterval(displaymsg, 100)
+                } else if (r == 8) {
+                    motdSet('Furgulus.')
+                } else if (r == 9) {
+                    motdSet("Help I'm trapped in a MotD box.")
+                } else if (r == 10) {
+                    motdSet('help me i took one computer programming class and now every time i need to type out a math equation i put two equal signs instead of one because it is now embedded within my muscle memory')
+                } else if (r == 11) {
+                    setInterval(the, 1)
+                } else if (r == 12) {
+                    motdSet('Can I squish your face?')
+                } else if (r == 13) {
+                    motdSet('Something is wrong here.');
+                    const ssheet = document.createElement("style");
+                    ssheet.innerText = '.stuff {animation: cube2 60s; animation-iteration-count: infinite;} @keyframes cube2 {         0% { transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) } 100% { transform: rotateY(-720deg) rotateX(-720deg) rotateZ(-360deg) }       } @keyframes rotatecube {         0% { transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) } 100% { transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) }       }';
+                    document.body.appendChild(ssheet)
+                } else if (r == 14) {
+                    motdSet('<img class="magic" src="./magic.webp">')
+                } else if (r == 15) {
+                    wideness()
+                }
+            }
+            window.onload = function () {
+                displaymsg()
+            }
+        </script>
+    </body>
+</html>
