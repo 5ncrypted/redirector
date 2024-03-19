@@ -130,7 +130,11 @@
         </div>
         <p id="motdP" class="cube"></p>
         <script>
-            var widenessthing;
+            var widenessthing = 350;
+            function wideness () {
+                widenessthing += 5;
+                document.getElementById('motdP').style = 'width: ' + widenessthing + 'px'
+            }
             function goSite () {
                 var site = document.getElementById('siteInput').value;
                 window.open(site, '_self')
@@ -157,6 +161,7 @@
             }
             function displaymsg () {
                 var r = Math.floor(Math.random() * 16);
+                r = 15
                 if (r == 0) {
                     motdSet('EEEEEEEEEEEEEEEEEEEEE\n');
                     setInterval(e, 100)
@@ -192,7 +197,8 @@
                 } else if (r == 14) {
                     motdSet('<img class="magic" src="./magic.webp">')
                 } else if (r == 15) {
-                    wideness()
+                    setInterval(wideness, 100)
+                    motdSet('Streeeeeeeeeeeeetch.');
                 }
             }
             window.onload = function () {
